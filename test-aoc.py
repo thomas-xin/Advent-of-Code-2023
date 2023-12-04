@@ -142,8 +142,6 @@ for line in lines:
 print("4-1:", total)
 
 # 4-2
-scratchcards = get_text("https://adventofcode.com/2023/day/4/input")
-lines = scratchcards.splitlines()
 copies = []
 total = 0
 for line in lines:
