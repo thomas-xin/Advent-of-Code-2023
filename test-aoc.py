@@ -1,15 +1,15 @@
 session = "53616c7465645f5f323a6c5c332c87fbd52331d93a14c07469f5d276b013c7dcd5872ee4b40e1e93a9031e9980bd306baf5449575ab2bc5ec35f6d3d27acd085" # Insert your session ID here
 
-import requests
+import urllib.request
 cache = {}
 def get_text(url):
 	try:
 		return cache[url]
 	except KeyError:
-		with requests.get(url, cookies=dict(session=session)) as resp:
-			resp.raise_for_status()
-			cache[url] = resp.text
-			return resp.text
+		with urllib.request.urlopen(urllib.request.Request(url, headers=dict(Cookie=f"session={session}"))) as resp:
+			text = resp.read().decode("utf-8")
+			cache[url] = text
+			return text
 
 
 # 1-1

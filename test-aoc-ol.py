@@ -1,5 +1,5 @@
 session = "53616c7465645f5f323a6c5c332c87fbd52331d93a14c07469f5d276b013c7dcd5872ee4b40e1e93a9031e9980bd306baf5449575ab2bc5ec35f6d3d27acd085" # Insert your session ID here
-get_text = lambda url: globals().setdefault("cache", {}).get(url) or (resp := __import__("requests").get(url, cookies=dict(session=session))).raise_for_status() or (globals()["cache"].__setitem__(url, resp.text), resp.text)[-1]
+get_text = lambda url: globals().setdefault("cache", {}).get(url) or (text := (urllib := __import__("urllib.request")).request.urlopen(urllib.request.Request(url, headers=dict(Cookie=f"session={session}"))).read().decode("utf-8")) and (globals()["cache"].__setitem__(url, text), text)[-1]
 
 
 # 1-1
